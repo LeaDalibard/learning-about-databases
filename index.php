@@ -6,10 +6,10 @@ $sports = ['Football', 'Tennis', 'Ping pong', 'Volley ball', 'Rugby', 'Horse rid
 function openConnection(): PDO
 {
     // No bugs in this function, just use the right credentials.
-    $dbhost = "DB_HOST";
-    $dbuser = "DB_USER";
-    $dbpass = "DB_USER_PASSWORD";
-    $db = "DB_NAME";
+    $dbhost = "localhost";
+    $dbuser = "becode";
+    $dbpass = "becode";
+    $db = "database_learning";
 
     $driverOptions = [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
@@ -21,7 +21,7 @@ function openConnection(): PDO
 }
 
 $pdo = openConnection();
-
+//
 if(!empty($_POST['firstname']) && !empty($_POST['lastname'])) {
     //@todo possible bug below?
     if(!empty($_POST['id'])) {
@@ -29,7 +29,7 @@ if(!empty($_POST['firstname']) && !empty($_POST['lastname'])) {
         $message = 'Your record has been added';
     } else {
         //@todo why does this not work?
-        $handle = $pdo->prepare('UPDATE user VALUES (firstname = :firstname, lastname = :lastname, year = :year) WHERE id = :id');
+        $handle = $pdo->prepare('UPDATE user SET (firstname = :firstname, lastname = :lastname, year = :year) WHERE id = :id');// changed VALUES for SET
         $handle->bindValue(':id', $_POST['id']);
         $message = 'Your record has been updated';
     }
@@ -62,14 +62,14 @@ elseif(isset($_POST['delete'])) {
     //@todo BUG? Why does always delete all my users?
     $handle = $pdo->prepare('DELETE FROM user');
     //The line below just gave me an error, probably not important. Annoying line.
-    //$handle->bindValue(':id', $_POST['id']);
+    $handle->bindValue(':id', $_POST['id']);
     $handle->execute();
 
     $message = 'Your record has been deleted';
 }
 
 //@todo Invalid query?
-$handle = $pdo->prepare('SELECT id, concat_ws(firstname, lastname, " ") AS name, sport FROM user LEFT JOIN sport ON id = sport.user_id where year = :year order by sport');
+$handle = $pdo->prepare('SELECT user_id, concat_ws(firstname, lastname, " ") AS name, sport FROM user LEFT JOIN sport ON user_id = sport.user_id where year = :year order by sport');
 $handle->bindValue(':year', date('Y'));
 $handle->execute();
 $users = $handle->fetchAll();
