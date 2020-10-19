@@ -35,8 +35,6 @@ Technically, MySQL is an open-source database, but in practice, it no longer fee
 Technically there is not much difference between both versions, but in the last years MariaDB has being making more progress on performance, where it now outclasses MySQL for most use cases.
 To make the basic application is this exercise you will not notice a difference, but you can always [learn more about the differences](https://www.eversql.com/mariadb-vs-mysql/) between the vendors.
 
-![mysqljoke.png](images/mysqljoke.jpg)
-
 ### NEVER INSTALL BOTH MySQL and MariaDB
 You should never install both MySQL and MariaDB on the same machine. 
 This will lead to very difficult to fix conflicts that will take you a very long time to fix.
