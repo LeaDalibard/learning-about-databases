@@ -24,7 +24,7 @@ The coach has added some comments where these bugs are, but has given up on fixi
 Can you fix all the bugs?
 
 ## What is the difference between MySQL and MariaDB?
-![mariadb-vs-mysql.png](images/mariadb-vs-mysql.png)
+
 
 You will find that many articles use the terms MySQL and MariaDB interchangeably, but there are different databases. They do have a shared history, and are the same for 95%. 
 This means in practice that most projects can change from one db to another with probably only minor problems. 
